@@ -1,15 +1,22 @@
 ﻿Imports System.IO
 Public Class Form1
+    Dim myform As FrmSelect
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim csvRecords As New ArrayList()
         Dim lstDataColumns As New ArrayList()
 
-        lstDataColumns = ReadCsvFile("Category\アンダードッグ カテゴリ.csv")
+
+        myform = CType(Me.Owner, FrmSelect)
+        Dim filename As String
+        filename = myform.cmbFile.SelectedItem
+
+
+        lstDataColumns = ReadCsvFile("File\Category\" & filename & " カテゴリ.csv")
         If lstDataColumns Is Nothing Then
             Return
         End If
 
-        csvRecords = ReadCsvFile("File\アンダードッグ.csv") 'そのうちファイル名を変更できるようにする
+        csvRecords = ReadCsvFile("File\" & filename & ".csv") 'そのうちファイル名を変更できるようにする
         If csvRecords Is Nothing Then
             Return
         End If
@@ -97,43 +104,5 @@ Public Class Form1
         Application.Exit()
     End Sub
 
-    'Private Function Tabtab(ByRef targetData As String, ByRef keta As Integer, ByRef moji As String) As String
-    '    If targetData Is Nothing Then
-    '        targetData = ""
-    '    End If
 
-    '    Dim pad As Char
-
-    '    Dim value As String = String.Empty
-    '    'パディングする文字数を演算
-    '    '(文字数=桁-(対象文字列のバイト数-対象文字列の文字列数))
-    '    Dim PadLength As Integer = keta - (System.Text.Encoding.GetEncoding(65001).GetByteCount(targetData) - targetData.Length)
-    '    pad = Convert.ToChar(" ")
-
-    '    value = targetData.PadRight(PadLength, moji.ToCharArray()(0))
-
-    '    Return value
-
-    'End Function
-
-    '    Function padRight(ByVal st As String, ByVal len As Integer) As String
-    '        Dim len0 As Integer
-    '        len0 = LenB(st)
-    '        If len - len0 < 4 Then
-    '            Do Until len - len0 < 4
-    '                len = len + 1
-    '            Loop
-    '        Else
-    '            Return RTrim(st) & Space(len - len0)
-    '        End If
-    '    End Function
-
-    '    Private Shared Function LenB(ByVal str As String) As Integer
-    '        'Shift JISに変換したときに必要なバイト数を返す
-    '        Return System.Text.Encoding.GetEncoding(65001).GetByteCount(str)
-    '    End Function
-
-    '    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
-    '        Application.Exit()
-    '    End Sub
 End Class
