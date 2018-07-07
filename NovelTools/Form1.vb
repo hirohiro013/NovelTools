@@ -16,7 +16,7 @@ Public Class Form1
             Return
         End If
 
-        csvRecords = ReadCsvFile("File\" & filename & ".csv") 'そのうちファイル名を変更できるようにする
+        csvRecords = ReadCsvFile("File\" & filename & ".csv")
         If csvRecords Is Nothing Then
             Return
         End If
@@ -134,7 +134,6 @@ Public Class Form1
         Dim h As Integer = 0
 
         For i = 0 To csvRecords.Count - 1
-
             csvFieldOut = csvRecords(i)
             If csvFieldOut(0).indexof(txtSearch.Text) <> -1 Then
                 lstData.Items.Add(csvFieldOut(0), h)
@@ -143,7 +142,6 @@ Public Class Form1
                 Next
                 h = h + 1
             End If
-
         Next
 
     End Sub
