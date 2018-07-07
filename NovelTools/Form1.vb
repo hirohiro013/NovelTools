@@ -38,7 +38,7 @@ Public Class Form1
             Next
         Next
 
-        For k = 0 To lstDataColumns.Count - 1
+        For k = 0 To lstDataColumns.Count - 1 '=0
             lstDataColumnOut = lstDataColumns(k)
             If lstData.Items.Count > 0 Then
                 For i = 0 To lstDataColumnOut.Count - 1
@@ -104,5 +104,47 @@ Public Class Form1
         Application.Exit()
     End Sub
 
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        lstData.Items.Clear()
+        Dim csvRecords As New ArrayList()
+        Dim lstDataColumns As New ArrayList()
 
+
+        myform = CType(Me.Owner, FrmSelect)
+        Dim filename As String
+        filename = myform.cmbFile.SelectedItem
+
+
+        lstDataColumns = ReadCsvFile("File\Category\" & filename & " カテゴリ.csv")
+        If lstDataColumns Is Nothing Then
+            Return
+        End If
+
+        csvRecords = ReadCsvFile("File\" & filename & ".csv") 'そのうちファイル名を変更できるようにする
+        If csvRecords Is Nothing Then
+            Return
+        End If
+
+        Dim csvFieldOut As New ArrayList
+        Dim lstDataColumnOut As New ArrayList
+
+        Dim i As Int32
+        Dim j As Int32
+        Dim k As Int32
+        Dim h As Integer = 0
+
+        For i = 0 To csvRecords.Count - 1
+
+            csvFieldOut = csvRecords(i)
+            If csvFieldOut(0).indexof(txtSearch.Text) <> -1 Then
+                lstData.Items.Add(csvFieldOut(0), h)
+                For j = 1 To csvFieldOut.Count - 1
+                    lstData.Items(h).SubItems.Add(csvFieldOut(j))
+                Next
+                h = h + 1
+            End If
+
+        Next
+
+    End Sub
 End Class
