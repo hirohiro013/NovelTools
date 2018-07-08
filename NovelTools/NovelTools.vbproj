@@ -79,6 +79,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmDetail.Designer.vb">
+      <DependentUpon>FrmDetail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDetail.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmSelect.Designer.vb">
       <DependentUpon>FrmSelect.vb</DependentUpon>
     </Compile>
@@ -126,9 +132,6 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
-    <None Include="File\Category\アンダードッグ カテゴリ.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="File\アンダードッグ.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
