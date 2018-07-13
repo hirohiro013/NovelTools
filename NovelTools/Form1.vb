@@ -9,67 +9,67 @@ Public Class Form1
     Private Sub HirakuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HirakuToolStripMenuItem.Click
 
         Dim OFD As New OpenFileDialog
-            OFD.InitialDirectory = "File\"
-            OFD.Filter = "CSVファイル(*.csv)|*.html;*.htm|すべてのファイル(*.*)|*.*"
-            OFD.FilterIndex = 2
-            'タイトルを設定する
-            OFD.Title = "開くファイルを選択してください"
-            'ダイアログボックスを閉じる前に現在のディレクトリを復元するようにする
-            OFD.RestoreDirectory = True
-            '存在しないファイルの名前が指定されたとき警告を表示する
-            'デフォルトでTrueなので指定する必要はない
-            OFD.CheckFileExists = True
-            '存在しないパスが指定されたとき警告を表示する
-            'デフォルトでTrueなので指定する必要はない
-            OFD.CheckPathExists = True
+        OFD.InitialDirectory = "File\"
+        OFD.Filter = "CSVファイル(*.csv)|*.html;*.htm|すべてのファイル(*.*)|*.*"
+        OFD.FilterIndex = 2
+        'タイトルを設定する
+        OFD.Title = "開くファイルを選択してください"
+        'ダイアログボックスを閉じる前に現在のディレクトリを復元するようにする
+        OFD.RestoreDirectory = True
+        '存在しないファイルの名前が指定されたとき警告を表示する
+        'デフォルトでTrueなので指定する必要はない
+        OFD.CheckFileExists = True
+        '存在しないパスが指定されたとき警告を表示する
+        'デフォルトでTrueなので指定する必要はない
+        OFD.CheckPathExists = True
 
-            'ダイアログを表示する
-            If OFD.ShowDialog() = DialogResult.OK Then
-                'OKボタンがクリックされたとき、選択されたファイルを表示する
+        'ダイアログを表示する
+        If OFD.ShowDialog() = DialogResult.OK Then
+            'OKボタンがクリックされたとき、選択されたファイルを表示する
 
 
-                'CategoryFileName = OFD.FileName.Replace(".csv", " カテゴリー.csv")
-                'FileName = OFD.FileName
+            'CategoryFileName = OFD.FileName.Replace(".csv", " カテゴリー.csv")
+            'FileName = OFD.FileName
 
-                'lstDataColumns = ReadCsvFile(CategoryFileName) 'カテゴリはそのうちファイルを統合する
-                'If lstDataColumns Is Nothing Then
-                '    Return
-                'End If
+            'lstDataColumns = ReadCsvFile(CategoryFileName) 'カテゴリはそのうちファイルを統合する
+            'If lstDataColumns Is Nothing Then
+            '    Return
+            'End If
 
-                csvRecords = ReadCsvFile(OFD.FileName)
-                If csvRecords Is Nothing Then
-                    Return
-                End If
+            csvRecords = ReadCsvFile(OFD.FileName)
+            If csvRecords Is Nothing Then
+                Return
+            End If
 
-                Dim csvColumnOut As New ArrayList
-                Dim csvFieldOut As New ArrayList
-                'Dim lstDataColumnOut As New ArrayList
+            Dim csvColumnOut As New ArrayList
+            Dim csvFieldOut As New ArrayList
+            'Dim lstDataColumnOut As New ArrayList
 
-                Dim i As Int32
-                Dim j As Int32
+            Dim i As Int32
+            Dim j As Int32
             '        Dim k As Int32
             For i = 0 To csvRecords.Count - 1
-                    csvColumnOut = csvRecords(0)
-                    'Do Until i + 1 <= csvRecords.Count
-                    csvFieldOut = csvRecords(i)
+                csvColumnOut = csvRecords(0)
+                'Do Until i + 1 <= csvRecords.Count
+                csvFieldOut = csvRecords(i)
 
-                    lstData.Items.Add(csvFieldOut(0), i) '名前要素をアイテムとして追加
+                lstData.Items.Add(csvFieldOut(0), i) '名前要素をアイテムとして追加
 
-                    For j = 1 To csvFieldOut.Count - 1 '名前以外をサブアイテムとして追加
-                        lstData.Items(i).SubItems.Add(csvFieldOut(j))
-                    Next
-                    'Loop
+                For j = 1 To csvFieldOut.Count - 1 '名前以外をサブアイテムとして追加
+                    lstData.Items(i).SubItems.Add(csvFieldOut(j))
                 Next
+                'Loop
+            Next
 
 
-                'lstData.Columns.AddRange(csvColumnOut.ToArray(csvRecords(0)))
-                For k = 0 To csvColumnOut.Count - 1 '=0 'カラム要素
-                    If lstData.Items.Count > 0 Then '名前がリストビューに入ってたら
-                        lstData.Columns.Add(csvColumnOut(k), 100, HorizontalAlignment.Left)
-                    End If
-                Next
+            'lstData.Columns.AddRange(csvColumnOut.ToArray(csvRecords(0)))
+            For k = 0 To csvColumnOut.Count - 1 '=0 'カラム要素
+                If lstData.Items.Count > 0 Then '名前がリストビューに入ってたら
+                    lstData.Columns.Add(csvColumnOut(k), 100, HorizontalAlignment.Left)
+                End If
+            Next
 
-            End If
+        End If
 
     End Sub
 
